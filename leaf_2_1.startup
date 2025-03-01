@@ -3,7 +3,7 @@ ip address add 192.168.0.3/32 dev lo
 ip route add 192.168.0.3/32 dev lo
 
 # Setting up VXLAN interfaces
-ip link add vtep8000 type vxlan id 800 dev lo dstport 4789 local 192.168.0.3 nolearning
+ip link add vtep8000 type vxlan id 8000 dev lo dstport 4789 local 192.168.0.3 nolearning
 
 # Creating the companion bridge
 ip link add br100 type bridge
