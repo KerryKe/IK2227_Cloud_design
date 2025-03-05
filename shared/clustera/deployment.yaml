@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onceupon-deployment
+  namespace: llm-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: onceupon
+  template:
+    metadata:
+      labels:
+        app: onceupon
+    spec:
+      containers:
+      - name: onceupon-container
+        image: ik2227/llama2
+        env:
+        - name: LLAMA_SYS_PROMPT
+          value: "Once upon a time,"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /data
+          name: weights
+      volumes:
+      - name: weights
+        persistentVolumeClaim:
+          claimName: weights
