@@ -23,8 +23,8 @@ spec:
         - containerPort: 8080
         volumeMounts:
         - mountPath: /data
-          name: weights
+          name: once-mount
       volumes:
-      - name: weights
+      - name: once-mount
         persistentVolumeClaim:
-          claimName: weights
+          claimName: once-pvc
