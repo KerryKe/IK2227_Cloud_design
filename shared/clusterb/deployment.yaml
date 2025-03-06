@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: longago-deployment
+  namespace: llm-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: longago
+  template:
+    metadata:
+      labels:
+        app: longago
+    spec:
+      containers:
+      - name: longago-container
+        image: ik2227/llama2
+        env:
+        - name: LLAMA_SYS_PROMPT
+          value: "Long ago, in a faraway land,"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /data
+          name: long-mount
+      volumes:
+      - name: long-mount
+        persistentVolumeClaim:
+          claimName: long-pvc
