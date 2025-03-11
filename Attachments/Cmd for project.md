@@ -9,9 +9,13 @@ sudo kathara lstart --privilege
 
 ### Kubernet check
 #### On controller1
+kathara connect controller1
+
 kubectl get node
 
 kubectl get pod -A
+
+
 
 kubectl apply -f /shared/clustera/namespace.yaml
 
@@ -25,6 +29,12 @@ kubectl apply -f /shared/clustera/ingress.yaml
 
 #### On controller2
 kathara connect controller2
+
+kubectl get node
+
+kubectl get pod -A
+
+
 
 kubectl apply -f /shared/clusterb/namespace.yaml
 
