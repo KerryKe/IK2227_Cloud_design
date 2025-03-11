@@ -1,13 +1,14 @@
-$TTL 604800
-@   IN  SOA clustera.com. root.clustera.com. (
-        2025030801  ; Serial
-        28      ; Refresh
-        14       ; Retry
-        3600000     ; Expire
-        0 )    ; Negative Cache TTL
-
+$TTL 60000
+@   IN  SOA ROOT-SERVER.  root.ROOT-SERVER. 
+(
+        2025030801  ; serial
+        28      ; refresh
+        14       ; retry
+        3600000     ; expire
+        0     ; negative cache ttl
+) 
 @       	  IN  NS  ROOT_SERVER.
 ROOT-SERVER.      IN  A   10.30.40.2
 clustera.com.     IN  A   10.0.200.1
-clusterb.com      IN  A   10.0.100.1
+clusterb.com.     IN  A   10.0.100.1
 
