@@ -7,7 +7,7 @@ $TTL 60000
         3600000     ; expire
         0     ; negative cache ttl
 ) 
-@       	  IN  NS  ROOT_SERVER.
+@       	  IN  NS  ROOT-SERVER.
 ROOT-SERVER.      IN  A   10.30.40.2
 clustera.com.     IN  A   10.0.200.1
 clusterb.com.     IN  A   10.0.100.1
