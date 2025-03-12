@@ -26,7 +26,7 @@ spec:
         - name: ENABLE_RDMA
           value: "true"
         - name: RXE_IFACE
-          value: "rxe1"
+          value: "rxe0"
         ports:
         - containerPort: 8080
         volumeMounts:
