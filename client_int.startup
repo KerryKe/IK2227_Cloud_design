@@ -1,0 +1,6 @@
+# Configure IP addresses
+ip address add 10.100.100.2/24 dev eth0
+
+
+# Configure default route toward as100r1
+ip route add default via 10.100.100.1 dev eth0
