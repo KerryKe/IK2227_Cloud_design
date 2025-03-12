@@ -13,18 +13,32 @@ spec:
       labels:
         app: onceupon
     spec:
+      nodeSelector:
+        supports: rdma  # Ensures scheduling on RDMA-enabled nodes
       containers:
       - name: onceupon-container
         image: ik2227/llama2
+        securityContext:
+          privileged: true  # 
         env:
         - name: LLAMA_SYS_PROMPT
           value: "Once upon a time,"
+        - name: ENABLE_RDMA
+          value: "true"
+        - name: RXE_IFACE
+          value: "rxe1"
         ports:
         - containerPort: 8080
         volumeMounts:
-        - mountPath: /data
-          name: once-mount
+        - mountPath: /data/roce
+          name: roce-client
+        - mountPath: /dev/infiniband
+          name: ib
       volumes:
-      - name: once-mount
-        persistentVolumeClaim:
-          claimName: once-pvc
+      - name: roce-client
+        hostPath:
+          path: /shared/roce
+      - name: ib
+        hostPath:
+          path: /dev/infiniband
+

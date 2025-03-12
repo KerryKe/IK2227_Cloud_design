@@ -13,18 +13,32 @@ spec:
       labels:
         app: longago
     spec:
+      nodeSelector:
+        supports: rdma  # Ensures scheduling on RDMA-enabled nodes
       containers:
       - name: longago-container
         image: ik2227/llama2
+        securityContext:
+          privileged: true  # 
         env:
         - name: LLAMA_SYS_PROMPT
           value: "Long ago, in a faraway land,"
+        - name: ENABLE_RDMA
+          value: "true"
+        - name: RXE_IFACE
+          value: "rxe1"
         ports:
         - containerPort: 8080
         volumeMounts:
-        - mountPath: /data
-          name: long-mount
+        - mountPath: /data/roce
+          name: roce-client
+        - mountPath: /dev/infiniband
+          name: ib
       volumes:
-      - name: long-mount
-        persistentVolumeClaim:
-          claimName: long-pvc
+      - name: roce-client
+        hostPath:
+          path: /shared/roce
+      - name: ib
+        hostPath:
+          path: /dev/infiniband
+
