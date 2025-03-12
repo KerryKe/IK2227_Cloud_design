@@ -8,4 +8,4 @@ systemctl start bind9
 systemctl start frr
 
 chmod +x /healthcheck.sh
-screen -dmS healthcheck /bin/bash -c "healthcheck.sh"
+screen -dmS healthcheck /bin/bash -c "/healthcheck.sh"
