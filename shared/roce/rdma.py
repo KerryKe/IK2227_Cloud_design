@@ -144,5 +144,9 @@ def read_weights(iface: str) -> None:
     # Close TCP Connection
     sock.close()
 
-if __name__ == "__main__":
-    read_weights("rxe1")  # Change this to your actual RDMA device interface
+if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        logging.error("Usage: rdma.py <iface>")
+        sys.exit(1)
+    
+    read_weights(sys.argv[1])
