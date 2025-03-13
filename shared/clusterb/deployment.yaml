@@ -13,8 +13,6 @@ spec:
       labels:
         app: longago
     spec:
-      nodeSelector:
-        supports: rdma  # Ensures scheduling on RDMA-enabled nodes
       containers:
       - name: longago-container
         image: ik2227/llama2
@@ -41,4 +39,6 @@ spec:
       - name: ib
         hostPath:
           path: /dev/infiniband
+      nodeSelector:
+        supports: rdma  # Ensures scheduling on RDMA-enabled nodes
 
