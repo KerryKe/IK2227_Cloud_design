@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: longago-deployment
+  namespace: llm-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: longago
+  template:
+    metadata:
+      labels:
+        app: longago
+    spec:
+      containers:
+      - name: longago-container
+        image: ik2227/llama2
+        
+        securityContext:
+          privileged: true
+        
+        env:
+        - name: LLAMA_SYS_PROMPT
+          value: "Long ago, in a faraway land,"
+        - name: ENABLE_RDMA
+          value: "true"
+        - name: RXE_IFACE
+          value: "rxe2"
+          
+        ports:
+        - containerPort: 8080
+        
+        volumeMounts:
+        - mountPath: /data/roce
+          name: rose-client
+        - mountPath: /dev/infiniband
+          name: ib
+          
+      volumes:
+      - name: rose-client
+        hostPath: 
+          path: /shared/roce
+      - name: ib
+        hostPath:
+          path: /dev/infiniband
+          
+      nodeSelector:
+        supports: rdma
